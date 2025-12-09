@@ -13,3 +13,7 @@ B-type (Branch): For conditional branches (e.g., beq, bne). Uses rs1, rs2, and a
 U-type (Upper Immediate): For loading 20-bit immediate values into the upper part of a register (e.g., lui, auipc).
 
 J-type (Jump): For unconditional jumps (e.g., jal). Uses rd, ra, and a 20-bit immediate offset
+
+
+IMMEDIATE GENERATION
+Here, the MSB (sign bit) is repeated x times to fill in the empty gaps on the left side of the already present immediate bits.
