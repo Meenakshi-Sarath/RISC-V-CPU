@@ -3,7 +3,14 @@ Remember, the control unit here also has branch and opcode control signals.
 The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder.
 <img width="1250" height="760" alt="image" src="https://github.com/user-attachments/assets/030be80d-3113-4ff5-b65c-2f571840aecd" />
 
+funct3 = operation group
+
+funct7 = operation variant
+
+imm = literal constant value
+
 <img width="1190" height="436" alt="image" src="https://github.com/user-attachments/assets/a4cf4d98-ffc7-4f52-807a-f2356908986e" />
+
 R-type (Register-Register): For register-to-register operations (e.g., add, sub). Uses rs1, rs2 for sources, rd for destination, plus function fields.
 
 I-type (Immediate/Load): For instructions with a short immediate value or memory loads (e.g., addi, lw). Uses rs1, rd, and a 12-bit immediate.
