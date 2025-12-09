@@ -4,9 +4,9 @@ The ALU control you see below is the ALU decoder and the other signals are handl
 <img width="1250" height="760" alt="image" src="https://github.com/user-attachments/assets/030be80d-3113-4ff5-b65c-2f571840aecd" />
 
 funct3 (3 bits) = operation group: tells the ALU (and decoder) which operation
--funct3 values are fixed by the RISC-V specification.
--Each funct3 code ALWAYS corresponds to the same arithmetic/logic operation.
--Your alu_decoder MUST follow this exact mapping.
+- funct3 values are fixed by the RISC-V specification.
+- Each funct3 code ALWAYS corresponds to the same arithmetic/logic operation.
+- Your alu_decoder MUST follow this exact mapping.
 -       3'b000 → ADD/SUB
         3'b001 → SLL
         3'b010 → SLT
