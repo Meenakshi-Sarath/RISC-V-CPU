@@ -16,4 +16,6 @@ J-type (Jump): For unconditional jumps (e.g., jal). Uses rd, ra, and a 20-bit im
 
 
 IMMEDIATE GENERATION
-Here, the MSB (sign bit) is repeated x times to fill in the empty gaps on the left side of the already present immediate bits.
+- Here, the MSB (sign bit) is repeated x times to fill in the empty gaps on the left side of the already present immediate bits.
+- Because RISC-V branch and jump targets are 2-byte aligned, so we append a 0 at the end of immediate value for both these instruction types.
+- Branch target address = PC + (imm << 1) [same for JAL]
