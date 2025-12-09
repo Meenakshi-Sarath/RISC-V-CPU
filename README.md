@@ -12,6 +12,7 @@ funct3 (3 bits) = operation group: tells the ALU (and decoder) which operation
         3'b010 → SLT
         3'b011 → OR
         3'b100 → XOR
+        3'B101 → SRA/ SRL
         3'b110 → OR
         3'b111 → AND
 
