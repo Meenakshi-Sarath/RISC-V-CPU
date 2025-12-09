@@ -34,6 +34,17 @@ funct3 (3 bits) = operation group: tells the ALU (and decoder) which operation
         3'b110 → OR
         3'b111 → AND
 
+Similarly the branch behavior for each funct3 value is fixed by the RISC-V ISA.
+
+| funct3 | Instruction | Meaning                     |
+| ------ | ----------- | --------------------------- |
+| 000    | **BEQ**     | branch if equal (Zero = 1)  |
+| 001    | **BNE**     | branch if not equal (~Zero) |
+| 100    | **BLT**     | signed less than            |
+| 101    | **BGE**     | signed greater or equal     |
+| 110    | **BLTU**    | unsigned less than          |
+| 111    | **BGEU**    | unsigned greater or equal   |
+
 
 funct7 (7 bits) = operation variant: further refines OR differentiates between similar operations- ONLY present in R type instructions
 
