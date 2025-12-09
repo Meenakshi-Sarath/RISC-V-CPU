@@ -5,7 +5,7 @@ The ALU control you see below is the ALU decoder and the other signals are handl
 
 funct3 (3 bits) = operation group: tells the ALU (and decoder) which operation
 
-funct7 (7 bits) = operation variant: further refines OR differentiates between similar operations
+funct7 (7 bits) = operation variant: further refines OR differentiates between similar operations- ONLY present in R type instructions
 
 imm = literal constant value
 
