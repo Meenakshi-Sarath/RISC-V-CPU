@@ -3,9 +3,9 @@ Remember, the control unit here also has branch and opcode control signals.
 The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder.
 <img width="1250" height="760" alt="image" src="https://github.com/user-attachments/assets/030be80d-3113-4ff5-b65c-2f571840aecd" />
 
-funct3 = operation group
+funct3 (3 bits) = operation group: tells the ALU (and decoder) which operation
 
-funct7 = operation variant
+funct7 (7 bits) = operation variant: further refines OR differentiates between similar operations
 
 imm = literal constant value
 
