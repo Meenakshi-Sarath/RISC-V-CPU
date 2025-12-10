@@ -75,6 +75,8 @@ IMMEDIATE GENERATION
 - Because RISC-V branch and jump targets are 2-byte aligned, so we append a 0 at the end of immediate value for both these instruction types.
 - Branch target address = PC + (imm << 1) [same for JAL]
 
+NOTE: While JAL jumps to an address relative to the current instruction, JALR jumps to an even address relative to one stored in a register.
+
 DATAPATH 
 The datapath module is a box that: takes control signals from the controller, performs computations, gives results back (PC, ALU flags, memory addresses, register file writes, etc.)
 
