@@ -1,7 +1,11 @@
 A RISC-V CPU has 40 instructions.
 Remember, the control unit here also has branch and opcode control signals.
 The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder.
-<img width="1151" height="774" alt="image" src="https://github.com/user-attachments/assets/18918158-261b-4ea5-9e67-6929ae9e6d36" />
+<img width="892" height="690" alt="image" src="https://github.com/user-attachments/assets/9bb6b152-c769-4e70-947b-a8149b99fdb3" />
+
+Unconditional jump is similar to this 
+<img width="1419" height="340" alt="image" src="https://github.com/user-attachments/assets/ffe0c12f-c8f2-46a0-b620-edbe1f4107d5" />
+
 
 Opcode is fixed for each instruction category.
 ✔ funct3 selects the specific operation within that category.
