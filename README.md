@@ -1,3 +1,4 @@
+
 A RISC-V CPU has 40 instructions.
 Remember, the control unit here also has branch and opcode control signals.
 The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder.
@@ -73,3 +74,20 @@ IMMEDIATE GENERATION
 - Here, the MSB (sign bit) is repeated x times to fill in the empty gaps on the left side of the already present immediate bits.
 - Because RISC-V branch and jump targets are 2-byte aligned, so we append a 0 at the end of immediate value for both these instruction types.
 - Branch target address = PC + (imm << 1) [same for JAL]
+
+DATAPATH 
+The datapath module is a box that: takes control signals from the controller, performs computations, gives results back (PC, ALU flags, memory addresses, register file writes, etc.)
+
+Use this to ALWAYS decide properly:
+
+✔ If another module provides it → input
+
+(Instruction memory, data memory, control unit)
+
+✔ If another module needs it → output
+
+(PC for imem, data for dmem, ALU flags for control unit)
+
+✔ If it connects ONLY inside datapath → wire
+
+(Adders, ALU outputs, mux outputs, immediates)
