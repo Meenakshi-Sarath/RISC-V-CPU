@@ -93,3 +93,6 @@ Use this to ALWAYS decide properly:
 ✔ If it connects ONLY inside datapath → wire
 
 (Adders, ALU outputs, mux outputs, immediates)
+
+JALR:
+Indirect jumps using a base register plus offset (I-type), offering more flexibility for runtime determined targets. Saves the retun address (PC+4) in a register.
