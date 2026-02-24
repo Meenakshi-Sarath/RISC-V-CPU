@@ -1,0 +1,102 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 25.12.2025 16:31:57
+// Design Name: 
+// Module Name: tb_topLevel
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module tb_topLevel;
+    reg clk,rst,Ext_MemWrite;
+    reg [31:0] Ext_WriteData, Ext_DataAdr;
+    
+    wire MemWrite;
+    wire [31:0] PC,ReadData,Result,WriteData,DataAdr;
+    
+    topLevel dut(clk,rst,Ext_MemWrite,Ext_WriteData,Ext_DataAdr,MemWrite,
+    ReadData,Result,WriteData,DataAdr);
+    
+    //Clock generation
+    always #5 clk=~clk;
+    
+    //Define the task check 
+    task check;
+        input cond;
+        input [200:0] msg;
+        begin
+           if(cond)
+                $display("PASS: %s",msg);
+           else
+                $display("FAIL: %s",msg); 
+        end
+    endtask
+    
+    reg [31:0] data_mem [0:255];
+    integer i;
+    initial begin
+        for (i = 0; i < 256; i = i + 1)
+            data_mem[i] = 32'b0;
+    end
+    
+    always @(posedge clk) begin
+    if (MemWrite)
+        data_mem[DataAdr[9:2]] <= WriteData;
+    end
+    
+    assign ReadData = data_mem[DataAdr[9:2]];
+    
+    //testcases
+    initial begin
+        clk=0;rst=1;Ext_MemWrite=0;Ext_DataAdr=0;Ext_WriteData=0;
+        $display("\n--- RISC-V SINGLE CYCLE CPU SYSTEM TEST ---");
+        
+        //-------------------------------
+        //Preload values into data memory
+        //-------------------------------
+        
+        #10;
+        rst=0;
+        Ext_MemWrite=1;
+        Ext_DataAdr=32'd100;
+        Ext_WriteData = 32'd42;
+        
+        #10;
+        Ext_MemWrite=0;
+        
+        //-------------------------------
+        //Release reset so CPU can take control
+        //-------------------------------
+        #10; rst=0;
+        
+        //-------------------------------
+        //Repeat for enough cycles to finish add-branch and load 
+        //-------------------------------
+        repeat (10) @ (posedge clk)  
+        
+        //-------------------------------
+        //Check results
+        //-------------------------------     
+        
+        check(dut.rv.dp.rf.registers[9]==32'd42,"LW loaded correct value into x9");
+        check(PC!=32'd0,"PC updated successfully");
+        check(Result!=32'dx,"Result success");
+        
+        $display("\n--- SYSTEM TEST COMPLETED ---");
+        $finish;  
+    end
+    
+endmodule
