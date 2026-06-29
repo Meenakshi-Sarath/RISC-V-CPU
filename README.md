@@ -1,11 +1,11 @@
 
-A RISC-V CPU has 40 instructions, 32 general purpose registers.
-rv32i- base 32 bit integer instruction set for RISC V.
-32 registers, each 32 bit wide:
-        x0: hardwired to 0
-        x1 (ra); return address by standard convention
-        x2 (sp): stack pointer
-        x3-x31: general purpose registers
+A RISC-V CPU has 40 instructions, 32 general purpose registers. <br>
+rv32i- base 32 bit integer instruction set for RISC V.<br>
+32 registers, each 32 bit wide:<br>
+        x0: hardwired to 0 <br>
+        x1 (ra); return address by standard convention <br>
+        x2 (sp): stack pointer <br>
+        x3-x31: general purpose registers <br>
 
 Remember, the control unit here also has branch and opcode control signals.
 The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder.
