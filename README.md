@@ -1,5 +1,12 @@
 
-A RISC-V CPU has 40 instructions.
+A RISC-V CPU has 40 instructions, 32 general purpose registers.
+rv32i- base 32 bit integer instruction set for RISC V.
+32 registers, each 32 bit wide:
+        x0: hardwired to 0
+        x1 (ra); return address by standard convention
+        x2 (sp): stack pointer
+        x3-x31: general purpose registers
+
 Remember, the control unit here also has branch and opcode control signals.
 The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder.
 <img width="892" height="690" alt="image" src="https://github.com/user-attachments/assets/9bb6b152-c769-4e70-947b-a8149b99fdb3" />
@@ -9,7 +16,7 @@ Unconditional jump is similar to this
 
 
 Opcode is fixed for each instruction category.
-✔ funct3 selects the specific operation within that category.
+funct3 selects the specific operation within that category.
 These opcodes never change.
 They are defined by the RISC-V ISA and must be followed by all CPUs and compilers.
 
@@ -17,13 +24,13 @@ They are defined by the RISC-V ISA and must be followed by all CPUs and compiler
 | ---------------------------------- | --------------- |
 | R-type arithmetic (ADD, SUB, AND…) | **0110011**     |
 | I-type ALU (ADDI, ANDI…)           | **0010011**     |
-| Load (LW, LH, LB…)                 | **0000011**     |
-| Store (SW, SH, SB…)                | **0100011**     |
-| Branch (BEQ, BNE…)                 | **1100011**     |
-| JAL                                | **1101111**     |
-| JALR                               | **1100111**     |
-| LUI                                | **0110111**     |
-| AUIPC                              | **0010111**     |
+| S-type Load (LW, LH, LB…)          | **0000011**     |
+| S-type Store (SW, SH, SB…)         | **0100011**     |
+| B-type Branch (BEQ, BNE…)          | **1100011**     |
+| J-type JAL                         | **1101111**     |
+| J-type JALR                        | **1100111**     |
+| U-type LUI                         | **0110111**     |
+| U-type AUIPC                       | **0010111**     |
 
 
 funct3 (3 bits) = operation group: tells the ALU (and decoder) which operation
