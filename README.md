@@ -24,7 +24,7 @@ They are defined by the RISC-V ISA and must be followed by all CPUs and compiler
 | ---------------------------------- | --------------- |
 | R-type arithmetic (ADD, SUB, AND…) | **0110011**     |
 | I-type ALU (ADDI, ANDI…)           | **0010011**     |
-| S-type Load (LW, LH, LB…)          | **0000011**     |
+| I-type Load (LW, LH, LB…)          | **0000011**     |
 | S-type Store (SW, SH, SB…)         | **0100011**     |
 | B-type Branch (BEQ, BNE…)          | **1100011**     |
 | J-type JAL                         | **1101111**     |
