@@ -7,6 +7,9 @@ rv32i- base 32 bit integer instruction set for RISC V.<br>
         x2 (sp): stack pointer <br>
         x3-x31: general purpose registers <br>
 
+Instruction memory: 64 entry word addressed ROM <br>
+Data memory: 64 entry byte addressed RAM
+
 Remember, the control unit here also has branch and opcode control signals.
 The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder.
 <img width="892" height="690" alt="image" src="https://github.com/user-attachments/assets/9bb6b152-c769-4e70-947b-a8149b99fdb3" />
