@@ -1,5 +1,5 @@
 
-A RISC-V CPU has 40 instructions, 32 general purpose registers. <br>
+A RISC-V CPU has 40 instructions, 32 general purpose registers.  
 rv32i- base 32 bit integer instruction set for RISC V.<br>
 32 registers, each 32 bit wide:<br>
         x0: hardwired to 0 <br>
