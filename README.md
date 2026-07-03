@@ -7,6 +7,8 @@ rv32i- base 32 bit integer instruction set for RISC V.<br>
         x2 (sp): stack pointer <br>
         x3-x31: general purpose registers <br>
 
+RISC V CPU is a load-store architecture- means to perform operations on data we cant directly use it from data memory, instead, we need to load from memory to register, perform the math using registers and then store the value back in memory.
+
 Instruction memory: 64 entry word addressed ROM <br>
 Data memory: 64 entry byte addressed RAM
 
