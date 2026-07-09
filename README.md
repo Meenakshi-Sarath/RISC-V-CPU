@@ -46,3 +46,6 @@ Each instruction passes through the following stages during a single clock cycle
 6) Access Data Memory (Load/Store)
 7) Write result back to Register File
 8) Update Program Counter
+
+## License <br>
+This project is licensed under the MIT License.
