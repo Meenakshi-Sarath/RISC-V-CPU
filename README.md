@@ -13,3 +13,8 @@ The design is modular, with separate RTL implementations for the datapath, contr
 * Modular Verilog RTL Design
 * Instruction and Data Memory
 * Simulation Testbenches
+
+## Processor Specifications <br>
+| Features | Specification |
+| --- | --- |
+| ISA | RV32I |
