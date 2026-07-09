@@ -62,6 +62,7 @@ Each instruction passes through the following stages during a single clock cycle
 
 ## Supported Instruction Types
 | Type | Purpose |
+| --- | --- |
 |R-Type |	Register-to-Register Arithmetic |
 | I-Type	| Immediate Arithmetic & Loads |
 | S-Type | Stores |
@@ -71,6 +72,7 @@ Each instruction passes through the following stages during a single clock cycle
 
 ## Supported Opcodes
 | Instruction Type |	Opcode |
+| --- | --- |
 | R-Type	| 0110011 |
 | I-Type ALU |	0010011 |
 | Loads	| 0000011 |
