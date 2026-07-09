@@ -24,6 +24,16 @@ The design is modular, with separate RTL implementations for the datapath, contr
 | Instruction Memory | 64 bit ROM |
 | Word size | 32 bits |
 
+## Register File
+
+The processor implements the standard RV32I register file.
+| Register | Description |
+| --- | --- |
+| x0 | Hardwired to 0 |
+| x1 | Return address |
+| x2 | Stack Pointer |
+| x3 - x31 | General Purpose Registers |
+
 ## Instruction Flow
 
 Each instruction passes through the following stages during a single clock cycle:
