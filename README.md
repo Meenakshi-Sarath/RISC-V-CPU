@@ -34,8 +34,21 @@ The processor implements the standard RV32I register file.
 | x2 | Stack Pointer |
 | x3 - x31 | General Purpose Registers |
 
-## Instruction Flow
+## Processor Architecture <br>
+(Insert datapath image here.)
+The processor consists of the following major modules:
 
+Program Counter
+Instruction Memory
+Register File
+Immediate Generator
+ALU
+ALU Decoder
+Main Decoder
+Data Memory
+Branch and Jump Logic
+
+## Instruction Flow <br> 
 Each instruction passes through the following stages during a single clock cycle:
 
 1) Fetch instruction from Instruction Memory
