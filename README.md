@@ -24,3 +24,15 @@ The design is modular, with separate RTL implementations for the datapath, contr
 | Instruction Memory | 64 bit ROM |
 | Word size | 32 bits |
 
+## Instruction Flow
+
+Each instruction passes through the following stages during a single clock cycle:
+
+1) Fetch instruction from Instruction Memory
+2) Decode instruction fields
+3) Read source registers
+4) Generate immediate (if required)
+5) Perform ALU operation
+6) Access Data Memory (Load/Store)
+7) Write result back to Register File
+8) Update Program Counter
