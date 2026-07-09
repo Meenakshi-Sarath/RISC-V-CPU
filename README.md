@@ -81,5 +81,32 @@ ALUOp
 
 Uses ALUOp, funct3, and funct7 fields to determine the ALU operation.
 
+## Immediate Generator
+
+The Immediate Generator extracts and sign-extends immediates for all supported instruction formats.
+
+Supported formats:
+
+* I-Type
+* S-Type
+* B-Type
+* U-Type
+* J-Type
+
+For branch and jump instructions, the least significant bit is appended as zero since target addresses are aligned.
+
+## Branch and Jump Support
+
+Implemented instructions include: <br>
+
+BEQ   
+BNE  
+BLT  
+BGE  
+BLTU  
+BGEU  
+JAL  
+JALR  
+
 ## License <br>
 This project is licensed under the MIT License.
