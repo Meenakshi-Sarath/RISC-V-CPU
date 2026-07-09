@@ -1,59 +1,73 @@
-A RISC-V CPU has 40 instructions, 32 general purpose registers.
-rv32i- base 32 bit integer instruction set for RISC V.
-32 registers, each 32 bit wide:
-x0: hardwired to 0
-x1 (ra); return address by standard convention
-x2 (sp): stack pointer
-x3-x31: general purpose registers
+A RISC-V CPU has 40 instructions, 32 general purpose registers.  
+rv32i- base 32 bit integer instruction set for RISC V.<br>
+32 registers, each 32 bit wide:<br>
+        x0: hardwired to 0 <br>
+        x1 (ra); return address by standard convention <br>
+        x2 (sp): stack pointer <br>
+        x3-x31: general purpose registers <br>
 
 RISC V CPU is a load-store architecture- means to perform operations on data we cant directly use it from data memory, instead, we need to load from memory to register, perform the math using registers and then store the value back in memory.
 
-Instruction memory: 64 entry word addressed ROM
+Instruction memory: 64 entry word addressed ROM <br>
 Data memory: 64 entry byte addressed RAM
 
-Remember, the control unit here also has branch and opcode control signals. The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder. image
+Remember, the control unit here also has branch and opcode control signals.
+The ALU control you see below is the ALU decoder and the other signals are handled in the main decoder.
+<img width="892" height="690" alt="image" src="https://github.com/user-attachments/assets/9bb6b152-c769-4e70-947b-a8149b99fdb3" />
 
-Unconditional jump is similar to this image
+Unconditional jump is similar to this 
+<img width="1419" height="340" alt="image" src="https://github.com/user-attachments/assets/ffe0c12f-c8f2-46a0-b620-edbe1f4107d5" />
 
-Opcode is fixed for each instruction category. funct3 selects the specific operation within that category. These opcodes never change. They are defined by the RISC-V ISA and must be followed by all CPUs and compilers.
 
-Instruction	Opcode (binary)
-R-type arithmetic (ADD, SUB, AND…)	0110011
-I-type ALU (ADDI, ANDI…)	0010011
-I-type Load (LW, LH, LB…)	0000011
-S-type Store (SW, SH, SB…)	0100011
-B-type Branch (BEQ, BNE…)	1100011
-J-type JAL	1101111
-J-type JALR	1100111
-U-type LUI	0110111
-U-type AUIPC	0010111
+Opcode is fixed for each instruction category.
+funct3 selects the specific operation within that category.
+These opcodes never change.
+They are defined by the RISC-V ISA and must be followed by all CPUs and compilers.
+
+| Instruction                        | Opcode (binary) |
+| ---------------------------------- | --------------- |
+| R-type arithmetic (ADD, SUB, AND…) | **0110011**     |
+| I-type ALU (ADDI, ANDI…)           | **0010011**     |
+| I-type Load (LW, LH, LB…)          | **0000011**     |
+| S-type Store (SW, SH, SB…)         | **0100011**     |
+| B-type Branch (BEQ, BNE…)          | **1100011**     |
+| J-type JAL                         | **1101111**     |
+| J-type JALR                        | **1100111**     |
+| U-type LUI                         | **0110111**     |
+| U-type AUIPC                       | **0010111**     |
+
+
 funct3 (3 bits) = operation group: tells the ALU (and decoder) which operation
+- funct3 values are fixed by the RISC-V specification.
+- Each funct3 code ALWAYS corresponds to the same arithmetic/logic operation.
+- Your alu_decoder MUST follow this exact mapping.
+-       3'b000 → ADD/SUB
+        3'b001 → SLL
+        3'b010 → SLT
+        3'b011 → SLTU
+        3'b100 → XOR
+        3'B101 → SRA/ SRL
+        3'b110 → OR
+        3'b111 → AND
 
-funct3 values are fixed by the RISC-V specification.
-Each funct3 code ALWAYS corresponds to the same arithmetic/logic operation.
-Your alu_decoder MUST follow this exact mapping.
-  3'b000 → ADD/SUB
-  3'b001 → SLL
-  3'b010 → SLT
-  3'b011 → SLTU
-  3'b100 → XOR
-  3'B101 → SRA/ SRL
-  3'b110 → OR
-  3'b111 → AND
 Similarly the branch behavior for each funct3 value is fixed by the RISC-V ISA.
 
-funct3	Instruction	Meaning
-000	BEQ	branch if equal (Zero = 1)
-001	BNE	branch if not equal (~Zero)
-100	BLT	signed less than
-101	BGE	signed greater or equal
-110	BLTU	unsigned less than
-111	BGEU	unsigned greater or equal
+| funct3 | Instruction | Meaning                     |
+| ------ | ----------- | --------------------------- |
+| 000    | **BEQ**     | branch if equal (Zero = 1)  |
+| 001    | **BNE**     | branch if not equal (~Zero) |
+| 100    | **BLT**     | signed less than            |
+| 101    | **BGE**     | signed greater or equal     |
+| 110    | **BLTU**    | unsigned less than          |
+| 111    | **BGEU**    | unsigned greater or equal   |
+
+
 funct7 (7 bits) = operation variant: further refines OR differentiates between similar operations- ONLY present in R type instructions
 
 imm = literal constant value
 
-image
+<img width="1190" height="436" alt="image" src="https://github.com/user-attachments/assets/a4cf4d98-ffc7-4f52-807a-f2356908986e" />
+
 R-type (Register-Register): For register-to-register operations (e.g., add, sub). Uses rs1, rs2 for sources, rd for destination, plus function fields.
 
 I-type (Immediate/Load): For instructions with a short immediate value or memory loads (e.g., addi, lw). Uses rs1, rd, and a 12-bit immediate.
@@ -66,14 +80,16 @@ U-type (Upper Immediate): For loading 20-bit immediate values into the upper par
 
 J-type (Jump): For unconditional jumps (e.g., jal). Uses rd, ra, and a 20-bit immediate offset
 
-IMMEDIATE GENERATION
 
-Here, the MSB (sign bit) is repeated x times to fill in the empty gaps on the left side of the already present immediate bits.
-Because RISC-V branch and jump targets are 2-byte aligned, so we append a 0 at the end of immediate value for both these instruction types.
-Branch target address = PC + (imm << 1) [same for JAL]
+IMMEDIATE GENERATION
+- Here, the MSB (sign bit) is repeated x times to fill in the empty gaps on the left side of the already present immediate bits.
+- Because RISC-V branch and jump targets are 2-byte aligned, so we append a 0 at the end of immediate value for both these instruction types.
+- Branch target address = PC + (imm << 1) [same for JAL]
+
 NOTE: While JAL jumps to an address relative to the current instruction, JALR jumps to an even address relative to one stored in a register.
 
-DATAPATH The datapath module is a box that: takes control signals from the controller, performs computations, gives results back (PC, ALU flags, memory addresses, register file writes, etc.)
+DATAPATH 
+The datapath module is a box that: takes control signals from the controller, performs computations, gives results back (PC, ALU flags, memory addresses, register file writes, etc.)
 
 Use this to ALWAYS decide properly:
 
@@ -89,4 +105,5 @@ Use this to ALWAYS decide properly:
 
 (Adders, ALU outputs, mux outputs, immediates)
 
-JALR: Indirect jumps using a base register plus offset (I-type), offering more flexibility for runtime determined targets. Saves the retun address (PC+4) in a register.
+JALR:
+Indirect jumps using a base register plus offset (I-type), offering more flexibility for runtime determined targets. Saves the retun address (PC+4) in a register.
