@@ -60,6 +60,27 @@ Each instruction passes through the following stages during a single clock cycle
 7) Write result back to Register File
 8) Update Program Counter
 
+## Supported Instruction Types
+| Type | Purpose |
+|R-Type |	Register-to-Register Arithmetic |
+| I-Type	| Immediate Arithmetic & Loads |
+| S-Type | Stores |
+| B-Type |	Conditional Branches |
+| U-Type	| Upper Immediate Instructions |
+| J-Type |	Jump Instructions |
+
+## Supported Opcodes
+| Instruction Type |	Opcode |
+| R-Type	| 0110011 |
+| I-Type ALU |	0010011 |
+| Loads	| 0000011 |
+| Stores |	0100011 |
+| Branches	| 1100011 |
+| JAL	| 1101111 |
+| JALR	| 1100111 |
+| LUI	| 0110111 |
+| AUIPC	| 0010111 |
+
 ## Control Unit
 
 The control logic is divided into two independent modules.
