@@ -36,17 +36,17 @@ The processor implements the standard RV32I register file.
 
 ## Processor Architecture <br>
 (Insert datapath image here.)
-The processor consists of the following major modules:
+The processor consists of the following major modules: <br>
 
-Program Counter
-Instruction Memory
-Register File
-Immediate Generator
-ALU
-ALU Decoder
-Main Decoder
-Data Memory
-Branch and Jump Logic
+* Program Counter
+* Instruction Memory
+* Register File
+* Immediate Generator
+* ALU
+* ALU Decoder
+* Main Decoder
+* Data Memory
+* Branch and Jump Logic
 
 ## Instruction Flow <br> 
 Each instruction passes through the following stages during a single clock cycle:
@@ -59,6 +59,27 @@ Each instruction passes through the following stages during a single clock cycle
 6) Access Data Memory (Load/Store)
 7) Write result back to Register File
 8) Update Program Counter
+
+## Control Unit
+
+The control logic is divided into two independent modules.
+
+### Main Decoder
+
+Generates the primary control signals:
+
+RegWrite
+MemWrite
+MemRead
+ALUSrc
+ResultSrc
+Branch
+Jump
+ALUOp
+
+### ALU Decoder
+
+Uses ALUOp, funct3, and funct7 fields to determine the ALU operation.
 
 ## License <br>
 This project is licensed under the MIT License.
