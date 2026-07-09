@@ -18,3 +18,9 @@ The design is modular, with separate RTL implementations for the datapath, contr
 | Features | Specification |
 | --- | --- |
 | ISA | RV32I |
+| Architecture | Single Cycle |
+| Register File | 32 X 32bits |
+| Data Memory | 64 bit RAM |
+| Instruction Memory | 64 bit ROM |
+| Word size | 32 bits |
+
